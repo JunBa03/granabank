@@ -20,3 +20,10 @@ body {
   background-color: var(--color-surface-1);
   color: var(--color-text-primary);
 }
+
+/* Contorno de foco con el color de la marca (solo al navegar con teclado) */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
