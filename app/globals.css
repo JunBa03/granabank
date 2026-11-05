@@ -9,7 +9,8 @@
   --color-text-primary: #181c23;
   --color-text-medium: #6b7280;
   --color-error: #dc2626;
-  --color-info: #2563eb;
+  --color-info: #2f5d9f;
+  --color-warning: #f5bc00;
 
   --font-sans: var(--font-jakarta);
   --font-slab: var(--font-roboto-slab);
