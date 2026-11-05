@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+/* Tokens del sistema de diseño (mismos nombres que en Figma) */
+@theme {
+  --color-primary: #7a1d2d;
+  --color-surface-1: #f1f2f5;
+  --color-surface-3: #ffffff;
+  --color-stroke-2: #d1d5db;
+  --color-text-primary: #181c23;
+  --color-text-medium: #6b7280;
+  --color-error: #dc2626;
+  --color-info: #2563eb;
+
+  --font-sans: var(--font-jakarta);
+  --font-slab: var(--font-roboto-slab);
+}
+
+body {
+  background-color: var(--color-surface-1);
+  color: var(--color-text-primary);
+}
