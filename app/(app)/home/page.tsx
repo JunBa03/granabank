@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BalanceCard } from "@/components/balance-card";
-import { BellIcon, SearchIcon } from "@/components/icons";
+import { SearchIcon } from "@/components/icons";
 import { MovementItem } from "@/components/movement-item";
+import { NotificationsButton } from "@/components/notifications-button";
 import { StateMessage } from "@/components/ui/state-message";
 import { verifySession } from "@/lib/dal";
 import { getMovements, getUserSummary } from "@/lib/data";
@@ -35,12 +36,14 @@ export default async function HomePage() {
         </div>
 
         <div className="flex items-center gap-4 text-[#1a1a1a]">
-          <Link href="/movements" aria-label="Buscar movimientos">
+          <Link
+            href="/movements"
+            aria-label="Buscar movimientos"
+            className="-m-1 rounded-full p-1 transition-colors hover:bg-stroke-2/40 active:scale-95"
+          >
             <SearchIcon className="size-6" />
           </Link>
-          <button type="button" aria-label="Notificaciones">
-            <BellIcon className="size-6" />
-          </button>
+          <NotificationsButton />
         </div>
       </header>
 
@@ -62,8 +65,8 @@ export default async function HomePage() {
           />
         ) : (
           <ul className="flex flex-col gap-3">
-            {movements.map((movement) => (
-              <li key={movement.id}>
+            {movements.map((movement, index) => (
+              <li key={movement.id} className="animate-enter" style={{ animationDelay: `${index * 40}ms` }}>
                 <MovementItem movement={movement} />
               </li>
             ))}

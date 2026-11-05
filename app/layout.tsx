@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Roboto_Slab } from "next/font/google";
+import { ToastProvider } from "@/components/ui/toast";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -25,7 +26,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="es" className={`${jakarta.variable} ${robotoSlab.variable} antialiased`}>
       <body className="font-sans">
         {/* El diseño es mobile: en pantallas grandes lo centramos con el ancho del Figma */}
-        <div className="mx-auto flex min-h-dvh w-full max-w-[414px] flex-col">{children}</div>
+        <ToastProvider>
+          <div className="mx-auto flex min-h-dvh w-full max-w-[414px] flex-col">{children}</div>
+        </ToastProvider>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { HomeIcon, LogoutIcon, ReceiptIcon } from "@/components/icons";
+import { useToast } from "@/components/ui/toast";
 
 const NAV_ITEMS = [
   { href: "/home", label: "Inicio", Icon: HomeIcon },
@@ -13,15 +14,22 @@ const NAV_ITEMS = [
 export function BottomNav() {
   const pathname = usePathname();
   const router = useRouter();
+  const showToast = useToast();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   async function handleLogout() {
     setIsLoggingOut(true);
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
-    } finally {
+      const response = await fetch("/api/auth/logout", { method: "POST" });
+      if (!response.ok) throw new Error(`Error ${response.status}`);
+
+      showToast("success", "Cerraste sesión correctamente");
       router.replace("/login");
       router.refresh();
+    } catch {
+      // Si no se borró la cookie no tiene sentido redirigir: el proxy nos devolvería a /home
+      showToast("error", "No pudimos cerrar la sesión. Intentá de nuevo.");
+      setIsLoggingOut(false);
     }
   }
 
@@ -38,7 +46,9 @@ export function BottomNav() {
             href={href}
             aria-label={label}
             aria-current={isActive ? "page" : undefined}
-            className={`p-1 transition-colors ${isActive ? "text-primary" : "text-text-medium hover:text-text-primary"}`}
+            className={`rounded-xl p-2 transition-colors active:scale-95 ${
+              isActive ? "text-primary" : "text-text-medium hover:bg-surface-1 hover:text-text-primary"
+            }`}
           >
             <Icon className="size-6" />
           </Link>
@@ -50,7 +60,7 @@ export function BottomNav() {
         onClick={handleLogout}
         disabled={isLoggingOut}
         aria-label="Cerrar sesión"
-        className="p-1 text-text-medium transition-colors hover:text-text-primary disabled:opacity-50"
+        className="rounded-xl p-2 text-text-medium transition-colors hover:bg-surface-1 hover:text-text-primary active:scale-95 disabled:opacity-50"
       >
         <LogoutIcon className="size-6" />
       </button>

@@ -8,6 +8,7 @@ import { MovementListSkeleton } from "@/components/movement-list-skeleton";
 import { Button } from "@/components/ui/button";
 import { StateMessage } from "@/components/ui/state-message";
 import { TextField } from "@/components/ui/text-field";
+import { useToast } from "@/components/ui/toast";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import type { MovementType } from "@/lib/validations";
 import { TypeFilters } from "./type-filters";
@@ -25,6 +26,7 @@ type Result = { query: string; movements: Movement[] } | { query: string; error:
 
 export function MovementsView() {
   const router = useRouter();
+  const showToast = useToast();
 
   const [search, setSearch] = useState("");
   const [type, setType] = useState<MovementType | null>(null);
@@ -52,6 +54,7 @@ export function MovementsView() {
         const response = await fetch(`/api/movements?${queryString}`, { signal: controller.signal });
 
         if (response.status === 401) {
+          showToast("info", "Tu sesión expiró. Volvé a ingresar.");
           router.replace("/login");
           return;
         }
@@ -70,7 +73,7 @@ export function MovementsView() {
 
     loadMovements();
     return () => controller.abort();
-  }, [query, queryString, router]);
+  }, [query, queryString, router, showToast]);
 
   function renderList() {
     if (isLoading) {
@@ -104,8 +107,9 @@ export function MovementsView() {
 
     return (
       <ul className="flex flex-col gap-3">
-        {result.movements.map((movement) => (
-          <li key={movement.id}>
+        {result.movements.map((movement, index) => (
+          // Animación escalonada, con tope para que una lista larga no tarde en aparecer
+          <li key={movement.id} className="animate-enter" style={{ animationDelay: `${Math.min(index, 8) * 40}ms` }}>
             <MovementItem movement={movement} />
           </li>
         ))}

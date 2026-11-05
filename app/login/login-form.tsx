@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { Alert } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { TextField } from "@/components/ui/text-field";
 import { loginSchema } from "@/lib/validations";
@@ -22,6 +23,8 @@ export function LoginForm() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Cambia en cada intento fallido para que la alerta vuelva a "sacudirse"
+  const [failedAttempts, setFailedAttempts] = useState(0);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -48,6 +51,7 @@ export function LoginForm() {
       if (!response.ok) {
         const data = await response.json().catch(() => null);
         setFormError(data?.error ?? "No pudimos iniciar sesión. Intentá de nuevo.");
+        setFailedAttempts((count) => count + 1);
         setIsSubmitting(false);
         return;
       }
@@ -56,6 +60,7 @@ export function LoginForm() {
       router.refresh();
     } catch {
       setFormError("No pudimos conectarnos. Revisá tu conexión e intentá de nuevo.");
+      setFailedAttempts((count) => count + 1);
       setIsSubmitting(false);
     }
   }
@@ -94,9 +99,9 @@ export function LoginForm() {
         <Checkbox label="Recordarme" checked={remember} onChange={setRemember} />
 
         {formError && (
-          <p role="alert" className="rounded-xl border border-error/30 bg-error/10 px-3.5 py-2.5 text-sm text-error">
+          <Alert key={failedAttempts} variant="error" className="animate-shake">
             {formError}
-          </p>
+          </Alert>
         )}
       </div>
 
