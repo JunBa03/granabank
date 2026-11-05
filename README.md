@@ -2,7 +2,7 @@
 
 Web app para el challenge técnico de Club Atlético Lanús. Tiene login, una home con el balance y los últimos movimientos, un listado de movimientos con búsqueda y filtros, y el detalle de cada movimiento.
 
-**Deploy:** _pendiente_
+**Deploy:** https://granabank-blond.vercel.app
 
 **Usuario de prueba:** `soygranate@clublanus.com` / `GRANATE1@`
 
