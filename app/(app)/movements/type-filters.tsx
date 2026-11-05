@@ -22,10 +22,10 @@ export function TypeFilters({ selected, onChange }: TypeFiltersProps) {
             type="button"
             onClick={() => onChange(value)}
             aria-pressed={isActive}
-            className={`shrink-0 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`shrink-0 rounded-full border px-3 py-1.5 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200 active:scale-95 ${
               isActive
                 ? "border-primary bg-primary/10 text-primary"
-                : "border-transparent text-text-medium hover:text-text-primary"
+                : "border-transparent text-text-medium hover:bg-stroke-2/30 hover:text-text-primary"
             }`}
           >
             {label}

@@ -11,7 +11,7 @@ export default function MovementNotFound() {
         action={
           <Link
             href="/movements"
-            className="flex h-10 w-full items-center justify-center rounded-full bg-primary font-slab text-sm text-white transition-opacity hover:opacity-90"
+            className="flex h-10 w-full items-center justify-center rounded-full bg-primary font-slab text-sm text-white transition-[background-color,transform] duration-150 hover:bg-primary-hover active:scale-[0.98]"
           >
             Ver movimientos
           </Link>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="flex flex-1 flex-col gap-6 px-6 pt-24 pb-6">
+    <main className="flex flex-1 animate-enter flex-col gap-6 px-6 pt-24 pb-6">
       <div className="flex flex-col items-center gap-3 text-center">
         <Image src="/escudo.svg" alt="Escudo del Club Atlético Lanús" width={72} height={72} priority />
         <h1 className="text-[40px] leading-none font-bold text-primary">GranaBank</h1>

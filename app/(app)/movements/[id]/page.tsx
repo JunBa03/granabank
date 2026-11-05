@@ -34,7 +34,7 @@ export default async function MovementDetailPage({ params }: PageProps<"/movemen
         <Link
           href="/movements"
           aria-label="Volver a movimientos"
-          className="flex size-9 items-center justify-center rounded-full bg-surface-3 text-text-primary transition-colors hover:bg-stroke-2/40"
+          className="flex size-9 items-center justify-center rounded-full bg-surface-3 text-text-primary shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-[background-color,transform] duration-150 hover:bg-stroke-2/40 active:scale-95"
         >
           <ChevronLeftIcon className="size-6" />
         </Link>

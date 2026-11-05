@@ -26,8 +26,10 @@ export function TextField({ label, error, leftIcon, type = "text", id, ...props 
       )}
 
       <div
-        className={`flex items-center gap-1.5 rounded-xl border bg-surface-3 px-3.5 py-2 transition-colors ${
-          error ? "border-error" : "border-stroke-2 focus-within:border-primary"
+        className={`flex items-center gap-1.5 rounded-xl border bg-surface-3 px-3.5 py-2 transition-[border-color,box-shadow] duration-200 focus-within:ring-4 ${
+          error
+            ? "border-error focus-within:ring-error/10"
+            : "border-stroke-2 focus-within:border-primary focus-within:ring-primary/10"
         }`}
       >
         {leftIcon}
@@ -46,7 +48,7 @@ export function TextField({ label, error, leftIcon, type = "text", id, ...props 
             type="button"
             onClick={() => setShowPassword((visible) => !visible)}
             aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
-            className="shrink-0 text-text-medium transition-colors hover:text-text-primary"
+            className="-m-1 shrink-0 rounded-md p-1 text-text-medium transition-colors hover:bg-surface-1 hover:text-text-primary"
           >
             {showPassword ? <EyeIcon className="size-[18px]" /> : <EyeOffIcon className="size-[18px]" />}
           </button>
@@ -54,7 +56,7 @@ export function TextField({ label, error, leftIcon, type = "text", id, ...props 
       </div>
 
       {error && (
-        <p id={errorId} className="text-xs text-error">
+        <p id={errorId} className="animate-enter text-xs text-error">
           {error}
         </p>
       )}

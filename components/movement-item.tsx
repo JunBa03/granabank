@@ -17,7 +17,7 @@ export function MovementItem({ movement }: MovementItemProps) {
   return (
     <Link
       href={`/movements/${movement.id}`}
-      className="flex h-[76px] items-center gap-4 rounded-2xl border border-stroke-2/40 bg-surface-3 p-4 transition-colors hover:border-stroke-2"
+      className="flex h-[76px] items-center gap-4 rounded-2xl border border-stroke-2/40 bg-surface-3 p-4 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-stroke-2 hover:shadow-[0_6px_20px_rgba(0,0,0,0.06)] active:translate-y-0 active:scale-[0.99]"
     >
       <MovementIcon type={movement.type} />
 

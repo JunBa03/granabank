@@ -9,7 +9,7 @@ export function Button({ loading = false, disabled, children, className = "", ..
     <button
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={`flex h-10 w-full items-center justify-center gap-2 rounded-full bg-primary px-8 font-slab text-sm text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+      className={`flex h-10 w-full items-center justify-center gap-2 rounded-full bg-primary px-8 font-slab text-sm text-white transition-[background-color,transform,opacity] duration-150 enabled:hover:bg-primary-hover enabled:active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
       {...props}
     >
       {loading && (
