@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum MovementType {
+  SUBSCRIPTION
+  RECEIVED
+  SENT
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  balanceCents Int
+  currency     String     @default("USD")
+  cardLast4    String
+  cardExpiry   String
+  createdAt    DateTime   @default(now())
+  movements    Movement[]
+}
+
+model Movement {
+  id          String       @id @default(cuid())
+  name        String
+  type        MovementType
+  amountCents Int
+  description String?
+  date        DateTime
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+}
