@@ -1,3 +1,5 @@
+import { MovementListSkeleton } from "@/components/movement-list-skeleton";
+
 // Se muestra automáticamente mientras la página carga los datos del servidor
 export default function HomeLoading() {
   return (
@@ -8,11 +10,7 @@ export default function HomeLoading() {
       </div>
       <div className="h-[190px] rounded-3xl bg-stroke-2" />
       <div className="h-6 w-48 rounded bg-stroke-2" />
-      <div className="flex flex-col gap-3">
-        {Array.from({ length: 5 }, (_, index) => (
-          <div key={index} className="h-[76px] rounded-2xl bg-stroke-2/60" />
-        ))}
-      </div>
+      <MovementListSkeleton />
     </main>
   );
 }
